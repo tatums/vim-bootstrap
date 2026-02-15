@@ -33,7 +33,9 @@ fi
 ln -s "$VIMRC_SOURCE" "$VIMRC_TARGET"
 echo "Symlinked $VIMRC_TARGET -> $VIMRC_SOURCE"
 
-# 4. Done
+# 4. Install plugins
+echo "Installing plugins..."
+nvim --headless +PlugInstall +qall
+
 echo ""
-echo "Setup complete! Open neovim and run:"
-echo "  :PlugInstall"
+echo "Setup complete!"
