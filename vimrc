@@ -6,16 +6,12 @@
 " ██╗╚████╔╝  ██║ ██║ ╚═╝ ██║ ██║  ██║ ╚██████╗
 " ╚═╝ ╚═══╝   ╚═╝ ╚═╝     ╚═╝ ╚═╝  ╚═╝  ╚═════╝
 "
-
-set nocompatible               " be iMproved
-filetype off                   " required!
 syntax on
 "Show line numbers
 set number
 " for gitgutter
 set updatetime=100
 set lazyredraw        " Don't redraw while executing macros
-set ttyfast           " Faster redrawing
 
 set shortmess+=c      " Don't show ins-completion-menu messages
 
@@ -36,11 +32,9 @@ set expandtab
 set tabstop=2
 set shiftwidth=2
 set hidden
-set history=100
+set history=1000
 set nowrap
-set smartindent
 set autoindent
-set path=**
 set autoread
 " Check spellling TODO re-enable this:
 " setlocal spell spelllang=en_us
@@ -51,11 +45,6 @@ set autoread
 autocmd BufRead,BufNewFile *.md setlocal spell
 autocmd BufRead,BufNewFile *.rb setlocal nospell
 autocmd BufRead,BufNewFile *.xml setlocal nospell
-
-
-if !has('gui_running')
-  set t_Co=256
-endif
 
 
 set list listchars=tab:»¯,trail:°,extends:»,precedes:«
@@ -88,7 +77,8 @@ Plug 'tpope/vim-sensible'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-rails'
-Plug 'guns/vim-sexp'
+" vim-sexp is for Lisp/Clojure
+" Plug 'guns/vim-sexp'
 Plug 'airblade/vim-gitgutter'
 Plug 'itchyny/lightline.vim'
 Plug 'scrooloose/nerdtree'
@@ -203,7 +193,7 @@ colorscheme catppuccin_mocha  " or catppuccin_latte, catppuccin_frappe, catppucc
 " let g:lightline = { 'colorscheme': 'catppuccin_mocha' }
 
 let g:lightline = {
-              \     'colorscheme': 'wombat',
+              \     'colorscheme': 'catppuccin_mocha',
               \     'component': {
               \        'filename': '%f',
               \     }
@@ -226,7 +216,7 @@ let mapleader=" "
 
 " https://github.com/tmux-plugins/vim-tmux-focus-events
 " autoreload a file if it changed
-" au FocusGained,BufEnter * :checktime
+au FocusGained,BufEnter * :checktime
 
 
 
@@ -314,7 +304,7 @@ endif
 " strip whitespace on save
 let g:better_whitespace_enabled=1
 let g:strip_whitespace_on_save=1
-let g:strip_max_file_size = 1000
+let g:strip_max_file_size = 10000
 let g:strip_whitespace_confirm=0
 
 
