@@ -340,7 +340,8 @@ hi Visual guifg=Grey guibg=fg
 "let g:copilot_enabled = v:false
 "let g:copilot_enabled = 0
 let g:copilot_filetypes = {
-      \ 'ruby': v:true,
+      \ 'markdown': v:false,
+      \ 'ruby': v:false,
       \ 'javascript': v:true,
       \ 'typescript': v:true,
       \ }
