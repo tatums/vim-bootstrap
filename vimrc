@@ -139,6 +139,7 @@ Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
 Plug 'christoomey/vim-tmux-navigator'
 Plug 'github/copilot.vim'
+Plug 'ludovicchabant/vim-gutentags' " Keeps tags file up to date
 call plug#end()
 
 " let g:copilot_workspace_folders = ["~/Code/scholastica"]
@@ -190,6 +191,14 @@ set statusline=%f
 "       \ }
 
 colorscheme catppuccin_mocha  " or catppuccin_latte, catppuccin_frappe, catppuccin_macchiato
+" Match fzf's popup and preview to Neovim, even in an older tmux shell.
+" Keep the selected row visible without washing out colored filenames.
+highlight FzfSelected guibg=#303b53 ctermbg=237
+let g:fzf_colors = {
+              \ 'bg': ['bg', 'Normal'],
+              \ 'preview-bg': ['bg', 'Normal'],
+              \ 'bg+': ['bg', 'FzfSelected'],
+              \ }
 " let g:lightline = { 'colorscheme': 'catppuccin_mocha' }
 
 let g:lightline = {
@@ -328,7 +337,6 @@ nnoremap q <Nop>
 
 
 
-hi Visual guifg=Grey guibg=fg
 
 
 
@@ -366,6 +374,12 @@ au BufRead,BufNewFile *.hbs set filetype=html
 " https://kulkarniamit.github.io/whatwhyhow/howto/use-vim-ctags.html
 " https://stackoverflow.com/questions/563616/vim-and-ctags-tips-and-tricks
 set tags=./tags;/
+" Only index git-tracked files (skips build output and untracked dirs)
+let g:gutentags_file_list_command = 'git ls-files'
+" Jump directly if one match, otherwise list all matches
+nnoremap <C-]> g<C-]>
+" Ask coc (LSP) for definitions first, fall back to the tags file
+set tagfunc=CocTagFunc
 
 " Disable mouse support.
 "   You want to disable this so tmux copy/paste works better
